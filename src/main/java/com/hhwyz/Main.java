@@ -28,9 +28,27 @@ public class Main extends JFrame {
             new LinkedBlockingQueue<>(1),
             Executors.defaultThreadFactory(),
             new ThreadPoolExecutor.DiscardOldestPolicy());
-//    ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    JWindow splash = null;
 
     public Main() {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel splashLabel = new JLabel("jEverything LOADING...");
+        splashLabel.setFont(new Font("Verdana", Font.BOLD, 80));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        splash = new JWindow();
+        splash.setContentPane(panel);
+        splash.getContentPane().add(splashLabel, BorderLayout.CENTER);
+        splash.setAlwaysOnTop(true);
+        Dimension splashSize = splash.getPreferredSize();
+        splash.setLocation(screenSize.width / 2 - (splashSize.width / 2),
+                screenSize.height / 2 - (splashSize.height / 2));
+        splash.pack();
+        splash.setVisible(true);
+
         if (Files.notExists(Paths.get(System.getProperty("user.home"), ".jEverything"))) {
             try {
                 Files.createDirectory(Paths.get(System.getProperty("user.home"), ".jEverything"));
@@ -46,6 +64,8 @@ public class Main extends JFrame {
         }
         // 初始化界面
         initUI();
+        splash.setVisible(false);
+        splash.dispose();
     }
 
     // main函数
