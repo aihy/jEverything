@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhwyz.FileMapper">
+    <insert id="batchInsertFile" parameterType="java.util.List">
+        insert into file (path, size)
+        values
+        <foreach item="item" collection="fileList" separator=",">
+            (#{item.path}, #{item.size})
+        </foreach>
+    </insert>
+    <delete id="deleteAll">
+        delete from file
+    </delete>
+    <select id="select" resultType="com.hhwyz.FileDO">
+        select path, size
+        from file
+        <where>
+            <foreach item="item" collection="leftPattern" separator=" ">
+                and path like #{item, jdbcType=VARCHAR} || '%'
+            </foreach>
+            <foreach item="item" collection="midPattern" separator=" ">
+                and path like '%' || #{item, jdbcType=VARCHAR} || '%'
+            </foreach>
+            <foreach item="item" collection="rightPattern" separator=" ">
+                and path like '%' || #{item, jdbcType=VARCHAR}
+            </foreach>
+        </where>
+        limit 10000
+    </select>
+    <select id="check" resultType="java.lang.Integer">
+        SELECT count(1) FROM sqlite_master WHERE type="table" AND name = "file"
+    </select>
+    <update id="init">
+        create table main.file
+        (
+        id integer
+        primary key autoincrement
+        unique,
+        gmt_create text default (datetime(CURRENT_TIMESTAMP, 'localtime')),
+        gmt_modified text default (datetime(CURRENT_TIMESTAMP, 'localtime')),
+        path text
+        constraint idx_path
+        unique,
+        size integer
+        );
+
+
+    </update>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) from file
+    </select>
+    <select id="selectTime" resultType="java.lang.String">
+        select gmt_modified from file order by id desc limit 1
+    </select>
+
+</mapper>
