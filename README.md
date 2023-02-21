@@ -33,7 +33,7 @@ jEverything索引文件列表，保存到sqlite中，搜索时直接搜索sqlite
 
 打开`系统设置`->`隐私与安全性`->`完全磁盘访问权限`。点击加号，按`command + shift + G`，输入`/System/Library/CoreServices/JavaLauncher.app`，按回车并选择打开
 
-### 2、下载`jEverything.jar`并打开
+### 2、下载[`jEverything.jar`](https://github.com/aihy/jEverything/releases/download/v1.0.0/jEverything-1.0.jar)并打开
 
 ### 3、等待索引建立完毕
 
