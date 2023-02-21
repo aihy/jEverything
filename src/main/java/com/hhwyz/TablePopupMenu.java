@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/**
- * @author erniu.wzh
- * @date 2021/12/7 16:30
- */
 public class TablePopupMenu extends JPopupMenu {
     public TablePopupMenu(String[] selectedPaths) {
 
