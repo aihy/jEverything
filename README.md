@@ -6,6 +6,8 @@ jEverything索引文件列表，保存到sqlite中，搜索时直接搜索sqlite
 
 我手边没有Windows电脑，因此没有对Windows操作系统做适配，部分功能只在macOS下可用
 
+而且Windows上已经有[Everything](https://www.voidtools.com/zh-cn/)了，完全没必要用我这玩意
+
 ## 功能
 
 * 使用字符串模糊匹配文件路径
